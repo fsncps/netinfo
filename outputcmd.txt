@@ -1,0 +1,1 @@
+pprintf "$(cat /opt/scripts/infoscreen/network/interface.txt) \n$(cat /opt/scripts/infoscreen/network/wifi.txt) \n\n$(cat /opt/scripts/infoscreen/network/speed.txt)" 
