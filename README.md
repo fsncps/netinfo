@@ -4,7 +4,7 @@ A set of scripts which output compiled network info for my screen/desktop widget
 For startup commands, add interface.sh to sudo commands with visudo.
 
 <p align="center">
-  <img src="image.jpg" width="400"/>
+  <img src="image.png" width="400"/>
 </p>
 
 ---
