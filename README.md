@@ -7,3 +7,7 @@ For startup commands, add interface.sh to sudo commands with visudo.
   <img src="image.jpg" width="400"/>
 </p>
 
+---
+### TODO (maybe):
+- add active transfers or other related info
+- create widgets for KDE and Awesome WM
