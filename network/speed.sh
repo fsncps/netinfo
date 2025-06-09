@@ -2,8 +2,9 @@
 #
 #
 export PATH=$PATH:/sbin:/usr/sbin
-tmpfile="/home/fsncps/.scripts/infoscreen/network/tmpspeed"
-file="/home/fsncps/.scripts/infoscreen/network/speed.txt"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+tmpfile="$DIR/tmpspeed"
+file="$DIR/speed.txt"
 
 while true; do
    speedtest >"$tmpfile"

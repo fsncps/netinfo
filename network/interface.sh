@@ -1,7 +1,9 @@
 #!/bin/bash
 
 export PATH=$PATH:/sbin:/usr/sbin
-file="/home/fsncps/.scripts/infoscreen/network/interface.txt"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+file="$DIR/interface.txt"
 
 wifi_pid=""
 speed_pid=""
@@ -51,11 +53,11 @@ while true; do
 
       # Start wifi.sh and speed.sh if not running
       if [[ -z "$wifi_pid" ]]; then
-         /home/fsncps/.scripts/infoscreen/network/wifi.sh &
+         $DIR/wifi.sh &
          wifi_pid=$!
       fi
       if [[ -z "$speed_pid" ]]; then
-         /home/fsncps/.scripts/infoscreen/network/speed.sh &
+         $DIR/speed.sh &
          speed_pid=$!
       fi
    fi
