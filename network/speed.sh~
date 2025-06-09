@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+#
+tmpfile="/opt/scripts/infoscreen/network/tmpspeed"
+file="/opt/scripts/infoscreen/network/speed.txt"
+
+while true; do
+   speedtest >$tmpfile
+   grep -e Hosted -e Download -e Upload $tmpfile >$file
+   sleep 10
+done

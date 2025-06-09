@@ -1,3 +1,0 @@
-[Sesto San Giovanni] [198.39 km]: 9.475 ms
-Download: 44.53 Mbit/s
-Upload: 0.00 Mbit/s

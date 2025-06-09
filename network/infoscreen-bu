@@ -1,0 +1,42 @@
+#!/bin/bash
+export PATH=$PATH:/sbin:/usr/sbin
+
+file="/home/fsncps/.scripts/infoscreen/network/interface.txt"
+
+while true; do
+   # Check if any network interface is up
+   interfaces=$(ip link show up | awk -F: '$1 ~ /^[0-9]+$/ {print $2}' | tr -d ' ')
+
+   # If no interfaces are up, print "interface down" and exit
+   if [[ -z "$interfaces" ]]; then
+      echo "interface down" >$file
+      exit 0
+   fi
+
+   # Initialize variables to track connections
+   eth_ip=""
+   wifi_ip=""
+
+   # Loop through each interface and check for IP addresses
+   for iface in $interfaces; do
+      ip_addr=$(ip -4 addr show "$iface" | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
+      if [[ "$iface" == "eth0" && -n "$ip_addr" ]]; then
+         eth_ip=$ip_addr
+      elif [[ "$iface" == "wlan"* || "$iface" == "wifi"* ]] && [[ -n "$ip_addr" ]]; then
+         wifi_ip=$ip_addr
+      fi
+   done
+
+   # Determine the connection status
+   if [[ -n "$eth_ip" && -z "$wifi_ip" ]]; then
+      echo "eth0 up: $eth_ip" >$file
+   elif [[ -z "$eth_ip" && -n "$wifi_ip" ]]; then
+      echo "WiFi up: $wifi_ip" >$file
+   elif [[ -n "$eth_ip" && -n "$wifi_ip" ]]; then
+      echo "WiFi up: $wifi_ip / eth0 up: $eth_ip" >$file
+   else
+      echo "Offline" >$file
+   fi
+   sleep 60
+done
